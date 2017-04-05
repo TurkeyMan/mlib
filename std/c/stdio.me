@@ -4,6 +4,7 @@
 
 module std.c.stdio;
 
+import std.c.stdint;
 
 // types
 def errno_t : int;
@@ -57,6 +58,62 @@ def stderr = fn => __acrt_iob_func(2);
 @extern_c def freopen_s : fn(stream : FILE**, fileName : const(char)*, mode : const(char)*, oldStream : FILE*) : errno_t  = void;
 
 
+@extern_c def fclose : fn(stream : FILE*) : int = void;
+
+@extern_c def fflush : fn(stream : FILE*) : int = void;
+
+@deprecate // (prefer setvbuf)
+@extern_c def setbuf : fn(stream : FILE*, buffer : char*) : void = void;
+@extern_c def setvbuf : fn(stream : FILE*, buffer : char*, mode : int, size : size_t) : int = void;
+
+@extern_c def fread : fn(buffer : void*, elementSize : size_t, elementCount : size_t, stream : FILE*) : size_t = void;
+@extern_c def fwrite : fn(buffer : const(void)*, elementSize : size_t, elementCount : size_t, stream : FILE*) : size_t = void;
+
+@extern_c def fgetc : fn(stream : FILE*) : int = void;
+@extern_c def getc : fn(stream : FILE*) : int = void;
+
+@extern_c def fgets : fn(buffer : char*, maxCount : int, stream : FILE*) : (char*) = void;
+
+@extern_c def fputc : fn(character : int, stream : FILE*) : int = void;
+@extern_c def putc : fn(character : int, stream : FILE*) : int = void;
+
+@extern_c def fputs : fn(buffer : const(char)*, stream : FILE*) : int = void;
+
+@extern_c def getchar : fn() : int = void;
+
+// TODO: where's gets?
+@extern_c def gets_s : fn(buffer : char*, size : rsize_t) : (char*) = void;
+
+@extern_c def putchar : fn(character : int) : int = void;
 
 @extern_c def puts : fn(str : const(char)*) : int = void;
-@extern_c def _putws : fn(str : const(wchar)*) : int = void;
+@extern_c def _putws : fn(str : const(wchar_t)*) : int = void;
+
+@extern_c def ungetc : fn(character : int, stream : FILE*) : int = void;
+
+@extern_c def ftell : fn(stream : FILE*) : int = void;
+@extern_c def fgetpos : fn(stream : FILE*, position : fpos_t*) : int = void;
+
+@extern_c def fseek : fn(stream : FILE*, offset : int, origin : int) : int = void;
+@extern_c def fsetpos : fn(stream : FILE*, position : const(fpos_t)*) : int = void;
+
+@extern_c def rewind : fn(stream : FILE*) : void = void;
+
+
+@extern_c def clearerr : fn(stream : FILE*) : void = void;
+
+@extern_c def feof : fn(stream : FILE*) : int = void;
+@extern_c def ferror : fn(stream : FILE*) : int = void;
+
+@extern_c def perror : fn(errorMessage : const(char)*) : void = void;
+
+
+@extern_c def remove : fn(fileName : const(char)*) : int = void;
+
+@extern_c def rename : fn(oldFileName : const(char)*, newFileName : const(char)*) : int = void;
+
+@deprecate // (prefer tmpfile_s)
+@extern_c def tmpfile : fn() : (FILE*) = void;
+@extern_c def tmpfile_s : fn(stream : FILE**) : errno_t = void;
+
+@extern_c def tmpnam_s : fn(buffer : char*, size : rsize_t) : errno_t = void;

@@ -1,0 +1,47 @@
+/**
+ * stdint.h binding
+ */
+
+module std.c.stdint;
+
+// C mangles long differently than int! >_<
+def c_long : int;
+
+def ptrdiff_t : ssize_t;
+
+def int8_t : byte;
+def uint8_t : ubyte;
+def int16_t : short;
+def uint16_t : ushort;
+def int32_t : int;
+def uint32_t : uint;
+def int64_t : long;
+def uint64_t : ulong;
+
+def intmax_t : long;
+def uintmax_t : ulong;
+
+def rsize_t : size_t;
+
+
+def INT8_MIN = byte.min;
+def INT16_MIN = short.min;
+def INT32_MIN = int.min;
+def INT64_MIN = long.min;
+def INT8_MAX = byte.max;
+def INT16_MAX = short.max;
+def INT32_MAX = int.max;
+def INT64_MAX = long.max;
+def UINT8_MAX = ubyte.max;
+def UINT16_MAX = ushort.max;
+def UINT32_MAX = uint.max;
+def UINT64_MAX = ulong.max;
+
+def INTMAX_MIN = intmax_t.min;
+def INTMAX_MAX = intmax_t.max;
+def UINTMAX_MAX = uintmax_t.max;
+
+def SIZE_MAX = size_t.max;
+
+def PTRDIFF_MIN = ptrdiff_t.min;
+def PTRDIFF_MAX = ptrdiff_t.max;
