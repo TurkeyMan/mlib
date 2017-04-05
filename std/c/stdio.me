@@ -1,0 +1,62 @@
+/**
+ * stdio.h binding
+ */
+
+module std.c.stdio;
+
+
+// types
+def errno_t : int;
+
+def fpos_t : long;
+
+def _iobuf : struct { var _Placeholder : void*; };
+def FILE : _iobuf;
+
+
+// magic
+def EOF : int = -1;
+def WEOF : short = 0xFFFF;
+
+def FILENAME_MAX : int = 260;
+
+def FOPEN_MAX : int = 20;
+
+def BUFSIZ : int = 512;
+
+def _IOFBF : int = 0x00;
+def _IOLBF : int = 0x40;
+def _IONBF : int = 0x04;
+
+def SEEK_SET : int = 0;
+def SEEK_CUR : int = 1;
+def SEEK_END : int = 2;
+
+def TMP_MAX : int = 2147483647;
+def TMP_MAX_S : int = TMP_MAX;
+
+
+// functions
+
+// everything __cdecl...
+
+// TODO: fix pointer on function return types!
+@extern_c def __acrt_iob_func : fn(i : uint) : (FILE*) = void;
+
+def stdin = fn => __acrt_iob_func(0);
+def stdout = fn => __acrt_iob_func(1);
+def stderr = fn => __acrt_iob_func(2);
+
+
+@deprecate // (prefer fopen_s)
+@extern_c def fopen : fn(fileName : const(char)*, mode : const(char)*) : (FILE*) = void;
+@extern_c def fopen_s : fn(stream : FILE**, fileName : const(char)*, mode : const(char)*) : errno_t = void;
+
+@deprecate // (prefer freopen_s)
+@extern_c def freopen : fn(fileName : const(char)*, mode : const(char)*, stream : FILE*) : (FILE*) = void;
+@extern_c def freopen_s : fn(stream : FILE**, fileName : const(char)*, mode : const(char)*, oldStream : FILE*) : errno_t  = void;
+
+
+
+@extern_c def puts : fn(str : const(char)*) : int = void;
+@extern_c def _putws : fn(str : const(wchar)*) : int = void;
