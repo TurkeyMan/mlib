@@ -13,26 +13,26 @@ def EXIT_FAILURE = 1;
 def RAND_MAX = 0x7fff;
 
 
-@extern_c def rand : fn() : int = void;
-@extern_c def srand : fn(seed : uint) : void = void;
+@extern_c fn rand() : int;
+@extern_c fn srand(seed : uint) : void;
 
-@[extern_c, noreturn] def abort : fn() : void = void;
+@[extern_c, noreturn] fn abort() : void;
 
-@[extern_c, noreturn] def exit : fn(status : int) : void = void;
-@extern_c def atexit : fn(func : (fn():void)*) : int = void;
+@[extern_c, noreturn] fn exit(status : int) : void;
+@extern_c fn atexit(func : (fn():void)*) : int;
 
-@[extern_c, noreturn] def quick_exit : fn(status : int) : void = void;
-@extern_c def at_quick_exit : fn(func : (fn():void)*) : int  = void;
+@[extern_c, noreturn] fn quick_exit(status : int) : void;
+@extern_c fn at_quick_exit(func : (fn():void)*) : int;
 
-@[extern_c, noreturn] def _Exit : fn(status : int) : void = void;
+@[extern_c, noreturn] fn _Exit(status : int) : void;
 
-@extern_c def getenv : fn(name : const(char)*) : (char*) = void;
+@extern_c fn getenv(name : const(char)*) : (char*);
 
-@extern_c def system : fn(command : const(char)*) : int = void;
+@extern_c fn system(command : const(char)*) : int;
 
-@extern_c def malloc : fn(size : size_t) : (void*) = void;
-@extern_c def realloc : fn(ptr : void*, new_size : size_t) : (void*) = void;
-@extern_c def free : fn(ptr : void*) : void  = void;
+@extern_c fn malloc(size : size_t) : (void*);
+@extern_c fn realloc(ptr : void*, new_size : size_t) : (void*);
+@extern_c fn free(ptr : void*) : void ;
 
-@extern_c def calloc : fn(num : size_t, size : size_t) : (void*) = void;
-@extern_c def aligned_alloc : fn(alignment : size_t, size: size_t) : (void*) = void;
+@extern_c fn calloc(num : size_t, size : size_t) : (void*);
+@extern_c fn aligned_alloc(alignment : size_t, size: size_t) : (void*);
